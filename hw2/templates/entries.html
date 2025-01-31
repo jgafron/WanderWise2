@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicBook - Song Entries</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+        .entry-card {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .entry-card img {
+            border-radius: 8px 0 0 8px;
+        }
+        .entry-card .card-body {
+            padding: 20px;
+        }
+        .entry-card .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .entry-card .card-text {
+            font-size: 1rem;
+            color: #555;
+        }
+        .entry-card .card-footer {
+            background-color: #f7f7f7;
+            border-top: 1px solid #ddd;
+        }
+        .entry-card .card-footer .badge {
+            font-size: 0.9rem;
+        }
+        .entry-card .card-footer .text-muted {
+            font-size: 0.85rem;
+        }
+        .entry-card .card-footer .btn {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center my-4">Welcome to MusicBook - Song Entries</h1>
+
+        <div class="row">
+            <!-- Loop through all songs -->
+            {% for song in songs %}
+            <div class="col-md-4">
+                <div class="card entry-card">
+                    <img src="{{ song.image_url }}" class="card-img-left" alt="Song Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ song.title }}</h5>
+                        <p class="card-text">Artist: {{ song.artist }}</p>
+                        <p class="card-text">Genre: {{ song.genre }}</p>
+                        <p class="card-text">Album: {{ song.album }}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <span class="badge badge-primary">Top Song</span> <!-- You can dynamically change this based on song popularity or other criteria -->
+                        <button class="btn btn-secondary btn-sm">Listen Now</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Script Links -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
