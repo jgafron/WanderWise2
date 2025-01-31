@@ -58,19 +58,18 @@
 
         <div class="row">
             <!-- Loop through all songs -->
-            {% for song in songs %}
+            {% for entry in entries %}
             <div class="col-md-4">
                 <div class="card entry-card">
-                    <img src="{{ song.image_url }}" class="card-img-left" alt="Song Image">
                     <div class="card-body">
-                        <h5 class="card-title">{{ song.title }}</h5>
-                        <p class="card-text">Artist: {{ song.artist }}</p>
-                        <p class="card-text">Genre: {{ song.genre }}</p>
-                        <p class="card-text">Album: {{ song.album }}</p>
+                        <h5 class="card-title">{{ entry.title }}</h5>
+                        <p class="card-text">Artist: {{ entry.artist }}</p>
+                        <p class="card-text">Genre: {{ entry.genre }}</p>
+                        <p class="card-text">Release Date: {{ entry.release_date }}</p>
+                        <p class="card-text">Rating: {{ entry.rating }}</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
-                        <span class="badge badge-primary">Top Song</span> <!-- You can dynamically change this based on song popularity or other criteria -->
-                        <button class="btn btn-secondary btn-sm">Listen Now</button>
+                        <a href = {{ entry.url }} <button class="btn btn-secondary btn-sm">Listen Now</button></a>
                     </div>
                 </div>
             </div>
