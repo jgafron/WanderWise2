@@ -1,10 +1,9 @@
-from datetime import date
-from .Model import Model
 import sqlite3
+import os
 
-DB_FILE = 'entries.db'  # Use your existing database
+DB_FILE = 'entries.db' 
 
-class model(Model):
+class Model:
     def __init__(self):
         self.connection = sqlite3.connect(DB_FILE)
 
@@ -13,9 +12,8 @@ class model(Model):
         Gets all rows from the database
         :return: List of lists containing all rows of database
         """
-        connection = sqlite3.connect(DB_FILE)
-        cursor = connection.cursor()
-        cursor.execute("SELECT * FROM entries")  # Ensure this matches your table name
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM songs") 
         return cursor.fetchall()
 
     def insert(self, title, genre, artist, writer, release_date, lyrics, rating, url):
@@ -27,22 +25,52 @@ class model(Model):
         :param writer: String
         :param release_date: Date
         :param lyrics: String
-        :param rating: Float
-        :param url: String
-        :return: True
+        :param rating: Integer (1 to 5 or any other scale)
+        :param url: String (URL of the song)
+        :return: True if successful, else False
         """
         params = {
             'title': title, 'genre': genre, 'artist': artist,
             'writer': writer, 'date': release_date, 'lyrics': lyrics,
             'rating': rating, 'url': url
         }
-        connection = sqlite3.connect(DB_FILE)
-        cursor = connection.cursor()
+        cursor = self.connection.cursor()
         cursor.execute("""
-            INSERT INTO entries (song_title, genre, artist, writer, release_date, lyrics, rating, url) 
+            INSERT INTO songs (song_title, genre, performer, songwriter, release_date, lyrics, rating, url) 
             VALUES (:title, :genre, :artist, :writer, :date, :lyrics, :rating, :url)
         """, params)
 
-        connection.commit()
+        self.connection.commit()
         cursor.close()
         return True
+
+    def create_table(self):
+        """
+        Creates the database table if it doesn't already exist
+        """
+        if not os.path.exists(DB_FILE):
+            conn = sqlite3.connect(DB_FILE)
+            cursor = conn.cursor()
+
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS songs (
+                song_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                song_title TEXT NOT NULL,
+                genre TEXT,
+                performer TEXT,
+                songwriter TEXT,
+                release_date TEXT,
+                lyrics TEXT,
+                rating INTEGER,
+                url TEXT
+            )
+            ''')
+
+            conn.commit()
+            conn.close()
+            print(f"Database '{DB_FILE}' and table created successfully.")
+        else:
+            print(f"Database '{DB_FILE}' already exists.")
+
+model = Model()
+model.create_table() 
