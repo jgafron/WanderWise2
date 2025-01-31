@@ -10,5 +10,9 @@ def LandingPage():
 def EntriesPage():
     return render_template("entries.html")
 
+@app.route("/addentry")
+def addEntryPage():
+    return render_template("addentry.html")
+
 if __name__ == '__main__':
     app.run()
