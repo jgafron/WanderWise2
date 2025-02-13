@@ -10,7 +10,7 @@ class Model:
         """
         self.client = datastore.Client('cloud-gafron-jgafron')
     
-    def from_datastore(entity):
+    def from_datastore(self, entity):
         """Translates Datastore results into the format expected by the
         application.
 
@@ -26,7 +26,7 @@ class Model:
             return None
         if isinstance(entity,list):
             entity = entity.pop()
-        return [entity['SongTitle'],entity['genre'],entity['artist'],entity['releasedate'], entity['lyrics'], entity['rating'], entity['url']]
+        return [entity['title'],entity['genre'],entity['artist'],entity['release_date'], entity['lyrics'], entity['rating'], entity['url']]
     
     def select(self):
         """
