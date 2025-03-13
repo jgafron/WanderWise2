@@ -1,0 +1,298 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body layout */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 450px;
+    height: 100vh;
+    background-color: #ffffff;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+/* Profile image */
+.airplane img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-bottom: 40px;
+}
+
+/* Menu buttons */
+.menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.menu li {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.menu li a {
+    display: block;
+    background-color: #34495e;
+    padding: 15px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    border-radius: 30px;
+    font-size: 24px;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.menu li a:hover {
+    background-color: #1abc9c;
+}
+
+/* Main content */
+.content {
+    margin-left: 470px;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Slideshow Container */
+/* Slideshow Container */
+.slideshow-container {
+    position: relative;
+    width: 1800px; /* Increased width */
+    height: 650px; /* Adjusted height slightly */
+    margin: auto;
+    margin-top: 30px; /* Moves it up */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff; /* Prevents empty gaps */
+}
+
+/* Ensure all slides stay the same size */
+.slide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style for Images */
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Fills the container without distortion */
+    border-radius: 10px;
+    background-color: white;
+}
+
+/* Next & Previous buttons */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: white;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.prev:hover, .next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Position prev and next buttons */
+.prev {
+    left: 10px;
+}
+.next {
+    right: 10px;
+}
+
+/* Fade animation */
+.fade {
+    animation: fadeEffect 1s ease-in-out;
+}
+
+.app-name {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2c3e50; /* Dark blue shade */
+    margin-top: -120px; /* Adjust spacing if needed */
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+/* Step Header - Position it in the lower-left of the slideshow */
+/* Step Image - Position in the lower-left of the slideshow */
+/* Step 1 Image - Position Below Slideshow */
+.step1-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 350px; /* Moves it slightly up from the bottom */
+    left: 565px; /* Aligns it with the left side of the slideshow */
+}
+
+.step1-image img {
+    width: 450px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+.mock-searchbar {
+    position: absolute; /* Allows precise placement */
+    bottom: 300px; /* Adjust this to move it up/down */
+    left: 630px; /* Adjust this to move it left/right */
+
+    width: 300px; /* Adjust width */
+    height: 50px; /* Adjust height */
+    background-color: #ffffff; /* White background */
+    border: 2px solid #ccc; /* Light gray border */
+    border-radius: 25px; /* Rounded edges */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 10px 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Placeholder text inside the mock search bar */
+.mock-placeholder {
+    font-size: 16px;
+    color: #aaa; /* Light gray to look like placeholder */
+    font-style: italic;
+}
+
+.arrow-symbol {
+    position: absolute;
+    bottom: 395px; /* Adjust to align with the search bar */
+    left: 990px; /* Adjust to move left/right */
+    
+    font-size: 100px; /* Makes it larger */
+    color: #043d7a; /* Blue color */
+}
+
+.arrow-symbol2 {
+    position: absolute;
+    bottom: 395px; /* Adjust to align with the search bar */
+    left: 1530px; /* Adjust to move left/right */
+    
+    font-size: 100px; /* Makes it larger */
+    color: #043d7a; /* Blue color */
+}
+
+.arrow-symbol3 {
+    position: absolute;
+    bottom: 395px; /* Adjust to align with the search bar */
+    left: 2050px; /* Adjust to move left/right */
+    
+    font-size: 100px; /* Makes it larger */
+    color: #043d7a; /* Blue color */
+}
+
+.step2-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 67px; /* Moves it slightly up from the bottom */
+    left: 1040px; /* Aligns it with the left side of the slideshow */
+}
+
+.step2-image img {
+    width: 550px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+.calendar-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 67px; /* Moves it slightly up from the bottom */
+    left: 1050px; /* Aligns it with the left side of the slideshow */
+}
+
+.calendar-image img {
+    width: 600px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+.step3-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 64px; /* Moves it slightly up from the bottom */
+    left: 1565px; /* Aligns it with the left side of the slideshow */
+}
+
+.step3-image img {
+    width: 550px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+.step4-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 64px; /* Moves it slightly up from the bottom */
+    left: 2020px; /* Aligns it with the left side of the slideshow */
+}
+
+.step4-image img {
+    width: 550px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+.step5-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 64px; /* Moves it slightly up from the bottom */
+    left: 1640px; /* Aligns it with the left side of the slideshow */
+}
+
+.step5-image img {
+    width: 400px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+
+.iternary-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 105px; /* Moves it slightly up from the bottom */
+    left: 2125px; /* Aligns it with the left side of the slideshow */
+}
+
+.iternary-image img {
+    width: 350px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+@keyframes fadeEffect {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+    <link rel="stylesheet" href="assets/css/planpage.css?v=1">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="airplane">
+            <img src="assets/img/airplane2.png" alt="Airplane Image">
+        </div>
+        <h2 class="app-name">WanderWise</h2> 
+        <ul class="menu">
+            <li><a href="#">My Trips</a></li>
+            <li><a href="#">Create a Trip</a></li>
+            <li><a href="#">Favorites</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <!-- Slideshow Container -->
+        <div class="slideshow-container">
+            <script>
+                for (let i = 1; i <= 23; i++) {
+                    document.write(`
+                        <div class="slide fade">
+                            <img src="assets/img/slideshow/image${i}.jpg" alt="Image ${i}">
+                        </div>
+                    `);
+                }
+            </script>
+
+            <!-- Navigation buttons -->
+            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        </div>
+
+        <div class="step1-image">
+            <img src="assets/img/planpage/step1.png" alt="Step1 Image">
+        </div>
+        <div class="step2-image">
+            <img src="assets/img/planpage/step2.png" alt="Step2 Image">
+        </div>
+        <div class="step3-image">
+            <img src="assets/img/planpage/step3.png" alt="Step3 Image">
+        </div>
+        <div class="step4-image">
+            <img src="assets/img/planpage/step4.png" alt="Step4 Image">
+        </div>
+        <div class="step5-image">
+            <img src="assets/img/planpage/step5.png" alt="Step4 Image">
+        </div>
+        <div class="iternary-image">
+            <img src="assets/img/planpage/iternary-image.png" alt="Step4 Image">
+        </div>
+    </div>
+
+    <div class="mock-searchbar">
+        <span class="mock-placeholder">The Ritz-Carlton, New York City</span>
+    </div>
+
+    <div class="calendar-image">
+        <img src="assets/img/planpage/calendar.png" alt="Calendar Image">
+    </div>
+
+    <div class="arrow-symbol">&rarr;</div>
+    <div class="arrow-symbol2">&rarr;</div>
+    <div class="arrow-symbol3">&rarr;</div>
+    
+    <script src="assets/js/slideshow.js"></script>
+
+</body>
+</html>
+
