@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Trip</title>
+    <link rel="stylesheet" href="assets/css/createtrip.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Enter where you will be staying</h2>
+
+        <!-- ✅ Form for Handling Submission -->
+        <form id="trip-form">
+            <!-- ✅ Google Map Display -->
+            <div id="map"></div>
+
+            <div class="search-container">
+                <input type="text" id="location-search" placeholder="Search for a hotel or Airbnb..." required>
+                <button type="button" id="search-btn">🔍</button>
+            </div>
+
+            <button type="submit" id="submit-btn" disabled>Save & Continue →</button>
+        </form>
+    </div>
+
+    <script src="assets/js/createtrip.js"></script>
+</body>
+</html>
+
