@@ -3,9 +3,21 @@ document.addEventListener("DOMContentLoaded", function () {
     let continueBtn = document.getElementById("continue-btn");
     let selectedHotelDisplay = document.getElementById("selected-hotel");
 
-    // ✅ Retrieve & Display Selected Hotel Location
-    let selectedLocation = sessionStorage.getItem("selectedLocation") || "a hotel";
-    selectedHotelDisplay.textContent = `You are staying at: ${selectedLocation}`;
+    // ✅ Retrieve & Parse Selected Hotel Location
+    let selectedLocation = sessionStorage.getItem("selectedHotel");
+
+    if (selectedLocation) {
+        let parsedLocation = JSON.parse(selectedLocation); // 🔹 Parse the JSON string
+
+        let addressParts = parsedLocation.address.split(","); // 🔹 Now it's an object, so we can access `.address`
+
+        let city = addressParts[1]?.trim() || "Unknown City"; // Add fallback in case undefined
+        let country = addressParts[4]?.trim() || "Unknown Country";
+
+        selectedHotelDisplay.textContent = `You are staying at: ${parsedLocation.name} in ${city}, ${country}`;
+    } else {
+        selectedHotelDisplay.textContent = "No hotel selected.";
+    }
 
     // ✅ Initialize Flatpickr for Date Selection
     flatpickr(dateInput, {
