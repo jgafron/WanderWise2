@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let parsedLocation = JSON.parse(selectedLocation); // 🔹 Parse the JSON string
 
         let addressParts = parsedLocation.address.split(","); // 🔹 Now it's an object, so we can access `.address`
-
+        console.log(addressParts)
         let city = addressParts[1]?.trim() || "Unknown City"; // Add fallback in case undefined
         let country = addressParts[4]?.trim() || "Unknown Country";
 
@@ -38,6 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ Handle Form Submission
     document.getElementById("date-form").addEventListener("submit", function (event) {
         event.preventDefault();
-        window.location.href = "next-step.html"; // Redirect to the next step
+        window.location.href = "/selectplaces";
     });
 });

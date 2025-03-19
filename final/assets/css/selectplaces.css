@@ -1,0 +1,177 @@
+/* ✅ General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* ✅ Centered Container */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Title */
+h2 {
+    margin-bottom: 15px;
+}
+
+/* ✅ Tab Navigation */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.tab-button.active {
+    background: #4CAF50;
+    color: white;
+}
+
+/* ✅ Search Bar */
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#search-input {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    font-size: 16px;
+}
+
+#search-btn {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    transition: background 0.3s;
+}
+
+#search-btn:hover {
+    background: #45a049;
+}
+
+/* ✅ Results Grid */
+#results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 10px;
+}
+
+/* ✅ Individual Place Cards */
+.place-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.place-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.place-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.place-card h3 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.place-card p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* ✅ Select Button */
+.select-btn {
+    padding: 8px 15px;
+    margin-top: 10px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.select-btn.selected {
+    background: #ff5722;
+}
+
+.select-btn:hover {
+    background: #45a049;
+}
+
+/* ✅ Floating "Next" Button */
+#next-btn {
+    display: block;
+    width: 200px;
+    padding: 12px;
+    font-size: 16px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 20px auto 0;
+    transition: background 0.3s;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+#next-btn.enabled {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#next-btn:hover {
+    background: #45a049;
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .tab-button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
+    #search-input {
+        width: 60%;
+    }
+}

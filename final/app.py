@@ -20,6 +20,11 @@ def select_dates():
 def plan():
     return render_template("planpage.html")
 
+
+@app.route("/selectplaces")
+def select_places():
+    return render_template("selectplaces.html")
+
 @app.route("/get-api-key")
 def get_api_key():
     api_key = os.getenv("GOOGLE_API_KEY")
