@@ -64,11 +64,22 @@
 
                 <!-- LET'S GET STARTED BUTTON -->
                 <div class="get-started-container">
-                    <a href="#start" class="btn btn-primary">Let's Get Started</a>
+                    <button class="btn btn-primary" id="get-started-btn">Let's Get Started</button>
                 </div>
+                
                 <!-- /LET'S GET STARTED BUTTON -->
             </div>
         </div>
+
+        <!-- Add this inside your <body> -->
+        <div>
+            <p id="user-info">Not logged in</p>
+            <button id="sign-out-btn" style="display: none;">Sign Out</button>
+        </div>
+
+        <!-- Include the JavaScript file -->
+        <script src="assets/js/auth.js"></script>
+
         <!-- /CONTENT AREA -->
     
         <!-- JAVASCRIPTS -->
