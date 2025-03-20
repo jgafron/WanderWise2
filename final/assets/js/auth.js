@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const getStartedButton = document.getElementById("get-started-btn");
     const signOutButton = document.getElementById("sign-out-btn");
-    const userInfo = document.getElementById("user-info");
+    const userInfoContainer = document.getElementById("user-info-container");
+    const userEmailElement = document.getElementById("user-email");
+    const userProfilePic = document.getElementById("user-profile-pic");
 
     let firebaseApp, auth, provider, signInWithPopup, signOut, onAuthStateChanged, getAuth, db;
 
@@ -13,14 +15,14 @@ document.addEventListener("DOMContentLoaded", async function () {
             const data = await response.json();
 
             if (data.firebaseConfig) {
-                console.log("Firebase Config Loaded:", data.firebaseConfig);
+                console.log("✅ Firebase Config Loaded:", data.firebaseConfig);
                 return data.firebaseConfig;
             } else {
-                console.error("Error fetching Firebase config");
+                console.error("❌ Error fetching Firebase config");
                 return null;
             }
         } catch (error) {
-            console.error("Fetching Firebase config failed:", error);
+            console.error("❌ Fetching Firebase config failed:", error);
             return null;
         }
     }
@@ -45,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         // ✅ Initialize Firestore
         db = firestoreModule.getFirestore(firebaseApp);
 
-        console.log("Firebase & Firestore Initialized");
+        console.log("✅ Firebase & Firestore Initialized");
         window.firebaseConfig = firebaseConfig; // ✅ Store globally for access in other scripts
         window.db = db; // ✅ Store Firestore globally
 
@@ -57,43 +59,73 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     function setupAuthListener() {
         onAuthStateChanged(auth, (user) => {
-            console.log("Checking Authentication State...");
+            console.log("🔄 Auth State Changed:", user);
+
             if (user) {
-                console.log("User is logged in:", user.email);
-                sessionStorage.setItem("firebaseUser", JSON.stringify(user)); // Store user info for other scripts
-                if (userInfo) userInfo.textContent = `Logged in as ${user.displayName}`;
-                if (getStartedButton) getStartedButton.style.display = "none";
-                if (signOutButton) signOutButton.style.display = "block";
+                console.log("✅ User is logged in:", user.email);
+                console.log("📸 Profile Picture:", user.photoURL);
+                sessionStorage.setItem("firebaseUser", JSON.stringify(user));
+
+                updateUserUI(user);
             } else {
-                console.log("User is NOT logged in.");
+                console.log("❌ User is NOT logged in.");
                 sessionStorage.removeItem("firebaseUser");
-                if (userInfo) userInfo.textContent = "Not logged in";
-                if (getStartedButton) getStartedButton.style.display = "block"; // Ensures button is visible
+
+                if (userInfoContainer) {
+                    userInfoContainer.style.display = "none";
+                    userEmailElement.textContent = "Not signed in";
+                    userProfilePic.src = "";
+                }
+
+                if (getStartedButton) getStartedButton.style.display = "block";
                 if (signOutButton) signOutButton.style.display = "none";
             }
         });
     }
 
+    function updateUserUI(user) {
+        if (!user) return;
+
+        if (userInfoContainer) {
+            userInfoContainer.style.display = "flex";
+            userEmailElement.textContent = user.email;
+            userProfilePic.src = user.photoURL || "https://via.placeholder.com/40";
+        }
+        
+        if (getStartedButton) getStartedButton.style.display = "none";
+        if (signOutButton) signOutButton.style.display = "block";
+    }
+
+    // ✅ Restore user session on page load (Useful if switching between pages)
+    document.addEventListener("DOMContentLoaded", function () {
+        let storedUser = sessionStorage.getItem("firebaseUser");
+        if (storedUser) {
+            let user = JSON.parse(storedUser);
+            console.log("🔄 Restoring user from session:", user);
+            updateUserUI(user);
+        }
+    });
+
     window.signInWithGoogle = async () => {
         try {
             const result = await signInWithPopup(auth, provider);
-            console.log(" User signed in:", result.user);
+            console.log("✅ User signed in:", result.user);
             const idToken = await result.user.getIdToken();
             await sendAuthTokenToBackend(idToken);
             window.location.href = "/plan";  
         } catch (error) {
-            console.error("Login failed:", error);
+            console.error("❌ Login failed:", error);
         }
     };
 
     window.signOutUser = async () => {
         try {
             await signOut(auth);
-            console.log(" User signed out");
+            console.log("🚪 User signed out");
             sessionStorage.removeItem("firebaseUser"); // ✅ Clear stored user info
             window.location.href = "/login.html";
         } catch (error) {
-            console.error("Logout failed:", error);
+            console.error("❌ Logout failed:", error);
         }
     };
 
@@ -106,9 +138,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             });
 
             const data = await response.json();
-            console.log(" Server Response:", data);
+            console.log("✅ Server Response:", data);
         } catch (error) {
-            console.error("Error sending ID token:", error);
+            console.error("❌ Error sending ID token:", error);
         }
     }
 
