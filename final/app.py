@@ -29,6 +29,10 @@ def select_places():
 def itinerary():
     return render_template("itinerary.html")
 
+@app.route("/trips")
+def trips():
+    return render_template("trips.html")
+
 
 @app.route("/get-api-key")
 def get_api_key():

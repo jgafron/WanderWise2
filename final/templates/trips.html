@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Trips - WanderWise</title>
+    <link rel="stylesheet" href="assets/css/trips.css">
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="airplane">
+            <img src="assets/img/airplane2.png" alt="Airplane Image">
+        </div>
+        <h2 class="app-name">WanderWise</h2> 
+        <ul class="menu">
+            <li><a href="#" class="active">My Trips</a></li>
+            <li><a href="plan.html">Create a Trip</a></li>
+            <li><a href="#">Favorites</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1 class="page-title">My Trips</h1>
+        <p class="subtitle">Explore and manage your saved itineraries.</p>
+
+        <!-- Container for Trips -->
+        <div class="trip-container" id="trip-list">
+            <p>Loading your saved trips...</p>
+        </div>
+    </div>
+
+    <script src="assets/js/auth.js" defer></script>
+    <script src="assets/js/mytrips.js" defer></script>
+</body>
+</html>
