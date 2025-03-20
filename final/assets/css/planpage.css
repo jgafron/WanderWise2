@@ -314,3 +314,28 @@ body {
 .sign-out-btn:hover {
     background-color: #cc0000;
 }
+
+.sign-in-container {
+    position: absolute;
+    bottom: 20px; /* Adjust positioning */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+}
+
+#sign-in-btn {
+    background-color: #1abc9c;
+    color: white;
+    font-size: 18px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 80%;
+}
+
+#sign-in-btn:hover {
+    background-color: #16a085;
+}
