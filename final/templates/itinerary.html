@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Itinerary</title>
+    <link rel="stylesheet" href="assets/css/itinerary.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1>Your Trip Itinerary</h1>
+        <button id="edit-selection">Modify Selection</button>
+    </header>
+
+    <div class="container">
+        <!-- SIDEBAR: Trip Details -->
+        <aside class="sidebar">
+            <h2>Trip Details</h2>
+            <div class="trip-info">
+                <p><strong>Hotel:</strong> <span id="hotel-name">Loading...</span></p>
+                <p><strong>Location:</strong> <span id="hotel-location">Loading...</span></p>
+                <p><strong>Duration:</strong> <span id="trip-duration">Loading...</span></p>
+            </div>
+
+            <h3>Selected Places</h3>
+            <ul id="selected-places">
+                <li>Loading...</li>
+            </ul>
+        </aside>
+
+        <!-- MAIN CONTENT: Itinerary Display -->
+        <main class="itinerary">
+            <h2>Generated Itinerary</h2>
+            <div id="loading-message">Generating your trip itinerary...</div>
+            <div id="itinerary-content"></div>
+            <button id="regenerate">Regenerate Itinerary</button>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <button id="save-itinerary">Save as PDF</button>
+        <button id="print-itinerary">Print Itinerary</button>
+    </footer>
+
+    <script src="assets/js/itinerary.js"></script>
+</body>
+</html>

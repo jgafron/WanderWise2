@@ -25,6 +25,11 @@ def plan():
 def select_places():
     return render_template("selectplaces.html")
 
+@app.route("/itinerary")
+def itinerary():
+    return render_template("itinerary.html")
+
+
 @app.route("/get-api-key")
 def get_api_key():
     api_key = os.getenv("GOOGLE_API_KEY")
