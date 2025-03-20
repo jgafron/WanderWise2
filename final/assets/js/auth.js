@@ -57,8 +57,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             // ✅ Send ID token to backend
             const idToken = await result.user.getIdToken();
             await sendAuthTokenToBackend(idToken);
-
-            window.location.href = "/";  // Redirect after login
+            window.location.href = "/plan";  // Redirect after login
         } catch (error) {
             console.error("🔥 Login failed:", error);
         }
