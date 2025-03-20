@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const nextButton = document.getElementById("next-btn");
     let selectedPlaces = [];
 
-    // ✅ Retrieve city & country from session storage
+    // Retrieve city & country from session storage
     let selectedHotel = JSON.parse(sessionStorage.getItem("selectedHotel") || "{}");
     let addressParts = selectedHotel.address ? selectedHotel.address.split(",") : [];
     let city = addressParts.length > 1 ? addressParts[1].trim() : "";
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log(`📍 Fetching places for: ${city}, ${country}`);
 
-    // ✅ Fetch places based on selected category
+    // Fetch places based on selected category
     function fetchPlaces(category) {
         let apiUrl = "";
 
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    // ✅ Handle selecting a place
+    // Handle selecting a place
     function attachSelectListeners() {
         document.querySelectorAll(".select-btn").forEach(button => {
             button.addEventListener("click", function () {
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // ✅ Update the "Selected Places" section
+    // Update the "Selected Places" section
     function updateSelectedPlaces() {
         selectedPlacesContainer.innerHTML = "";
         if (selectedPlaces.length === 0) {
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // ✅ Enable "Next" button when at least one place is selected
+    // Enable "Next" button when at least one place is selected
     function updateNextButton() {
         if (selectedPlaces.length > 0) {
             nextButton.classList.add("enabled");
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // ✅ Handle tab switching
+    // Handle tab switching
     document.querySelectorAll(".tab-button").forEach(button => {
         button.addEventListener("click", function () {
             document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
@@ -122,11 +122,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // ✅ Handle Next Button Click
+    // Handle Next Button Click
     nextButton.addEventListener("click", function () {
         window.location.href = "/itinerary"; // Move to the next step
     });
 
-    // ✅ Load the first category by default (Attractions)
+    // Load the first category by default (Attractions)
     fetchPlaces("attractions");
 });

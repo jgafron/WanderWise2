@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let continueBtn = document.getElementById("continue-btn");
     let selectedHotelDisplay = document.getElementById("selected-hotel");
 
-    // ✅ Retrieve & Parse Selected Hotel Location
+    // Retrieve & Parse Selected Hotel Location
     let selectedLocation = sessionStorage.getItem("selectedHotel");
 
     if (selectedLocation) {
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         selectedHotelDisplay.textContent = "No hotel selected.";
     }
 
-    // ✅ Initialize Flatpickr for Date Selection
+    // Initialize Flatpickr for Date Selection
     flatpickr(dateInput, {
         mode: "range", // Select start & end date
         minDate: "today", // No past dates
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // ✅ Handle Form Submission
+    // Handle Form Submission
     document.getElementById("date-form").addEventListener("submit", function (event) {
         event.preventDefault();
         window.location.href = "/selectplaces";

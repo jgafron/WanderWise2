@@ -4,35 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore Attractions</title>
-    <link rel="stylesheet" href="assets/css/selectplaces.css"> <!-- ✅ Custom Styles -->
+    <link rel="stylesheet" href="assets/css/selectplaces.css"> <!-- Custom Styles -->
 </head>
 <body>
 
     <div class="container">
         <h2>Explore & Select Your Activities</h2>
 
-        <!-- ✅ Tabs for Categories -->
+        <!-- Tabs for Categories -->
         <div class="tab-container">
             <button class="tab-button active" data-category="attractions">Attractions</button>
             <button class="tab-button" data-category="food">Food & Drinks</button>
         </div>
 
-        <!-- ✅ Search Bar (Optional) -->
+        <!-- Search Bar (Optional) -->
         <div class="search-container">
             <input type="text" id="search-input" placeholder="Search for places...">
             <button id="search-btn">🔍</button>
         </div>
 
-        <!-- ✅ Content Area for API Results -->
+        <!--Content Area for API Results -->
         <div id="results-container">
             <p>Loading attractions...</p> <!-- Placeholder while fetching API -->
         </div>
         
-        <!-- ✅ Floating "Next" Button -->
+        <!-- Floating "Next" Button -->
         <button id="next-btn" disabled>Next →</button>
     </div>
 
-    <script src="assets/js/selectplaces.js"></script> <!-- ✅ JavaScript Logic -->
+    <script src="assets/js/selectplaces.js"></script> <!-- JavaScript Logic -->
     <div id="selected-places-sidebar">
         <h2>Selected Places</h2>
         <div id="selected-places-list"></div>

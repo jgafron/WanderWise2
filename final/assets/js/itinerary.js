@@ -4,11 +4,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const tripDurationElement = document.getElementById("trip-duration");
     const selectedPlacesList = document.getElementById("selected-places");
     const itineraryContent = document.getElementById("itinerary-content");
+    const loadingMessage = document.getElementById("loading-message");
+    const regenerateButton = document.getElementById("regenerate");
 
     let selectedHotel = JSON.parse(sessionStorage.getItem("selectedHotel") || "{}");
     let selectedPlaces = JSON.parse(sessionStorage.getItem("selectedPlaces") || "[]");
     let tripDates = JSON.parse(sessionStorage.getItem("tripDates") || "[]");
 
+    // Display Selected Hotel and Trip Details
     hotelNameElement.textContent = selectedHotel.name || "Not selected";
     hotelLocationElement.textContent = selectedHotel.address || "Unknown location";
 
@@ -30,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     tripDurationElement.textContent = `${formattedDates} (${tripDuration})`;
 
+    // Display Selected Places
     selectedPlacesList.innerHTML = "";
     if (selectedPlaces.length === 0) {
         selectedPlacesList.innerHTML = "<li>No places selected.</li>";
@@ -45,5 +49,88 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    itineraryContent.innerHTML = "<p>Your itinerary will appear here. Feel free to draft your own plan.</p>";
+    // Display Loading Message and Fetch Itinerary
+    itineraryContent.innerHTML = "";
+    loadingMessage.style.display = "block"; // Show loading message
+
+    function fetchItinerary() {
+        let userPrompt = `Plan a ${tripDuration} itinerary for ${selectedHotel.address}, including ${selectedPlaces.map(p => p.name).join(", ")}. 
+        The itinerary should be structured efficiently by grouping nearby places together to minimize travel time. 
+        If the user does NOT have a food related place selected for a day, recommend a well-known restaurant that is nearby the
+        place they chose for that given day. Do not add too many extra places beyond what the user has selected. 
+
+        Format each day's plan as follows:
+
+        ---
+        Example Itinerary Format:
+
+        Day 1: Visit Place A
+        - Description of Place A.
+        - Travel to Place A (X minutes away from your hotel).
+        - Visit Place A
+        - Lunch recommendation (only if necessary).
+
+        Day 2: Visit Place B 
+        - Description of Place B.
+        - Travel to Place B (X minutes away from your hotel)
+        - Efficiently schedule the rest of the day based on proximity.
+
+        ---
+
+        Now, using this format, generate the itinerary for ${tripDuration} days.`;
+
+        fetch("https://us-central1-cloud-gafron-jgafron.cloudfunctions.net/generate_itinerary", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user_input: userPrompt })
+        })
+        .then(response => response.json())
+        .then(data => {
+            loadingMessage.style.display = "none"; // Hide loading message
+            if (data.itinerary) {
+                displayItinerary(data.itinerary); // Call new function to format output
+            } else {
+                itineraryContent.innerHTML = "<p>Failed to generate itinerary. Try again.</p>";
+            }
+        })        
+        
+        .catch(error => {
+            console.error("Error fetching itinerary:", error);
+            itineraryContent.innerHTML = "<p>Failed to generate itinerary. Try again later.</p>";
+            loadingMessage.style.display = "none";
+        });
+    }
+
+    fetchItinerary();
+
+    function displayItinerary(itineraryText) {
+        let itineraryContent = document.getElementById("itinerary-content");
+        itineraryContent.innerHTML = ""; // Clear previous content
+    
+        // Use regex to split at "Day X: " (preserving the split key)
+        let days = itineraryText.split(/(?=Day \d+: )/g); 
+    
+        days.forEach(dayText => {
+            let parts = dayText.split(": "); // Split "Day X: Title" into [Day X, Title + Details]
+            let dayTitle = parts[0].trim(); // "Day X"
+            let dayDetails = parts.slice(1).join(": ").trim(); // Everything after the first colon
+    
+            let dayCard = document.createElement("div");
+            dayCard.classList.add("day-card");
+            dayCard.innerHTML = `
+                <h2 class="day-title">${dayTitle}</h2>
+                <p class="day-content">${dayDetails.replace(/\n/g, "<br>")}</p>
+            `;
+            itineraryContent.appendChild(dayCard);
+        });
+    }
+    
+    // Regenerate Itinerary
+    regenerateButton.addEventListener("click", function () {
+        itineraryContent.innerHTML = "";
+        loadingMessage.style.display = "block"; // Show loading message again
+        fetchItinerary();
+    });
 });
