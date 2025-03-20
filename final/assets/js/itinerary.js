@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const itineraryContent = document.getElementById("itinerary-content");
     const loadingMessage = document.getElementById("loading-message");
     const regenerateButton = document.getElementById("regenerate");
+    const saveButton = document.getElementById("save-itinerary");
 
     let selectedHotel = JSON.parse(sessionStorage.getItem("selectedHotel") || "{}");
     let selectedPlaces = JSON.parse(sessionStorage.getItem("selectedPlaces") || "[]");
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24)); // Convert ms to days
 
         tripDuration = `${differenceInDays} Days`;
-        
+
         let options = { year: "numeric", month: "long", day: "numeric" };
         formattedDates = `${startDate.toLocaleDateString("en-US", options)} - ${endDate.toLocaleDateString("en-US", options)}`;
     }
@@ -95,7 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 itineraryContent.innerHTML = "<p>Failed to generate itinerary. Try again.</p>";
             }
         })        
-        
         .catch(error => {
             console.error("Error fetching itinerary:", error);
             itineraryContent.innerHTML = "<p>Failed to generate itinerary. Try again later.</p>";
@@ -109,13 +109,12 @@ document.addEventListener("DOMContentLoaded", function () {
         let itineraryContent = document.getElementById("itinerary-content");
         itineraryContent.innerHTML = ""; // Clear previous content
     
-        // Use regex to split at "Day X: " (preserving the split key)
-        let days = itineraryText.split(/(?=Day \d+: )/g); 
+        let days = itineraryText.split(/(?=Day \d+: )/g);
     
         days.forEach(dayText => {
-            let parts = dayText.split(": "); // Split "Day X: Title" into [Day X, Title + Details]
-            let dayTitle = parts[0].trim(); // "Day X"
-            let dayDetails = parts.slice(1).join(": ").trim(); // Everything after the first colon
+            let parts = dayText.split(": ");
+            let dayTitle = parts[0].trim();
+            let dayDetails = parts.slice(1).join(": ").trim();
     
             let dayCard = document.createElement("div");
             dayCard.classList.add("day-card");
@@ -126,11 +125,90 @@ document.addEventListener("DOMContentLoaded", function () {
             itineraryContent.appendChild(dayCard);
         });
     }
-    
+
+    console.log("🟢 itinerary.js Loaded!");
+
+// Retry logic: Wait for Firebase Config
+    let retryCount = 0;
+    const maxRetries = 10; // Try for ~5 seconds
+
+    function checkFirebaseConfig() {
+    if (window.firebaseConfig) {
+        console.log("Firebase Config on itinerary page:", window.firebaseConfig);
+    } else if (retryCount < maxRetries) {
+        retryCount++;
+        console.warn(`Firebase Config not found yet. Retrying... (${retryCount}/${maxRetries})`);
+        setTimeout(checkFirebaseConfig, 500); // Try again in 500ms
+    } else {
+        console.error("Firebase Config is still missing after retries. Check if auth.js is loaded.");
+    }
+    }
+
+// Start checking
+checkFirebaseConfig();
     // Regenerate Itinerary
     regenerateButton.addEventListener("click", function () {
         itineraryContent.innerHTML = "";
         loadingMessage.style.display = "block"; // Show loading message again
         fetchItinerary();
     });
+
+    // When Save Itinerary button is clicked, log the object instead of saving
+    saveButton.addEventListener("click", async function (event) {
+        event.preventDefault();
+        console.log("🟢 Save Itinerary button clicked. Preparing to save...");
+    
+        // ✅ Check if Firestore is available
+        if (!window.db) {
+            console.error("Firestore is not initialized! Check auth.js.");
+            alert("An error occurred: Firestore is not connected.");
+            return;
+        }
+    
+        // ✅ Get current logged-in user
+        let user = JSON.parse(sessionStorage.getItem("firebaseUser") || "{}");
+        if (!user.uid) {
+            console.error("User not authenticated. Cannot save itinerary.");
+            alert("You need to log in to save your itinerary.");
+            return;
+        }
+    
+        // ✅ Create itinerary object
+        let itineraryData = {
+            destination: selectedHotel.address || "Unknown Destination",
+            hotel: selectedHotel,
+            tripDates: {
+                start: tripDates[0] || "",
+                end: tripDates[1] || ""
+            },
+            selectedPlaces: selectedPlaces,
+            itineraryText: itineraryContent ? itineraryContent.innerText : "No itinerary available.",
+            timestamp: new Date().toISOString()
+        };
+    
+        console.log("📋 Itinerary Object to be saved:", itineraryData);
+    
+        // ✅ Generate a unique document ID for the itinerary
+        const firestoreModule = await import("https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js");
+        const { setDoc, doc } = firestoreModule;
+    
+        let itineraryId = Date.now().toString(); // Unique ID
+    
+        try {
+            console.log("⏳ Saving itinerary to Firestore...");
+            await setDoc(doc(window.db, `users/${user.uid}/itineraries`, itineraryId), itineraryData);
+            console.log("✅ Itinerary saved successfully!");
+            alert("✅ Your itinerary has been saved successfully!");
+    
+            // ✅ Redirect after saving
+            setTimeout(() => {
+                window.location.href = "/plan";
+            }, 2000);
+        } catch (error) {
+            console.error("❌ Error saving itinerary:", error);
+            alert("An error occurred while saving your itinerary. Please try again.");
+        }
+    });
+    
+    
 });
