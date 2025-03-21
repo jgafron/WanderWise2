@@ -8,21 +8,33 @@
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header>
-        <h1>Your Trip Itinerary</h1>
-        <button id="edit-selection">Modify Selection</button>
-    </header>
+    <!-- Sidebar Navigation (Same as earlier pages) -->
+    <div class="sidebar">
+        <div class="airplane">
+            <img src="assets/img/airplane2.png" alt="Airplane Image">
+        </div>
+        <h2 class="app-name">WanderWise</h2> 
+        <ul class="menu">
+            <li><a href="/plan" id="home-btn">Home</a></li>
+            <li><a href="/trips" id="my-trip-btn">My Trips</a></li>
+            <li><a href="/createtrip" id="create-trip-btn">Create a Trip</a></li>
+        </ul>
+        <div class="user-info-container" id="user-info-container">
+            <img id="user-profile-pic" class="user-profile-pic" src="https://via.placeholder.com/40" alt="User Image">
+            <span id="user-email" class="user-email">User Email</span>
+            <button id="sign-out-btn" class="sign-out-btn">Sign Out</button>
+        </div>
+    </div>
 
+    <!-- Itinerary Container -->
     <div class="container">
-        <!-- SIDEBAR: Trip Details -->
-        <aside class="sidebar">
+        <!-- Trip Details Sidebar -->
+        <aside class="trip-sidebar">
             <h2>Trip Details</h2>
             <div class="trip-info">
                 <p><strong>Hotel:</strong> <span id="hotel-name">Loading...</span></p>
                 <p><strong>Location:</strong> <span id="hotel-location">Loading...</span></p>
                 <p><strong>Duration:</strong> <span id="trip-duration">Loading...</span></p>
-                
             </div>
 
             <h3>Selected Places</h3>
@@ -31,7 +43,7 @@
             </ul>
         </aside>
 
-        <!-- MAIN CONTENT: Itinerary Display -->
+        <!-- Main Itinerary Content -->
         <main class="itinerary">
             <h2>Generated Itinerary</h2>
             <div id="loading-message">Generating your trip itinerary...</div>
@@ -40,10 +52,10 @@
         </main>
     </div>
 
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer>
         <button id="save-itinerary-as-pdf">Save as PDF</button>
-        <button id="save-itinerary">Save Itinerary</button> <!-- New button -->
+        <button id="save-itinerary">Save Itinerary</button>
         <button id="print-itinerary">Print Itinerary</button>
     </footer>
 

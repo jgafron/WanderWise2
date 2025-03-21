@@ -210,5 +210,18 @@ checkFirebaseConfig();
         }
     });
     
+    document.getElementById("home-btn").addEventListener("click", function () {
+        console.log("🏠 Redirecting to /plan...");
+        window.location.href = "/plan";
+    });
     
+    document.getElementById("my-trip-btn").addEventListener("click", function () {
+        console.log("📌 Redirecting to /trips...");
+        window.location.href = "/trips";
+    });
+    
+    document.getElementById("create-trip-btn").addEventListener("click", function () {
+        console.log("✈️ Redirecting to /createtrips...");
+        window.location.href = "/createtrip";
+    });
 });
