@@ -159,7 +159,7 @@ body {
 .step1-image {
     position: absolute; /* Ensures precise placement */
     bottom: 350px; /* Moves it slightly up from the bottom */
-    left: 565px; /* Aligns it with the left side of the slideshow */
+    left: 525px; /* Aligns it with the left side of the slideshow */
 }
 
 .step1-image img {
@@ -171,7 +171,7 @@ body {
 .mock-searchbar {
     position: absolute; /* Allows precise placement */
     bottom: 300px; /* Adjust this to move it up/down */
-    left: 630px; /* Adjust this to move it left/right */
+    left: 590px; /* Adjust this to move it left/right */
 
     width: 300px; /* Adjust width */
     height: 50px; /* Adjust height */
@@ -195,7 +195,7 @@ body {
 .arrow-symbol {
     position: absolute;
     bottom: 395px; /* Adjust to align with the search bar */
-    left: 990px; /* Adjust to move left/right */
+    left: 950px; /* Adjust to move left/right */
     
     font-size: 100px; /* Makes it larger */
     color: #043d7a; /* Blue color */
@@ -204,7 +204,7 @@ body {
 .arrow-symbol2 {
     position: absolute;
     bottom: 395px; /* Adjust to align with the search bar */
-    left: 1530px; /* Adjust to move left/right */
+    left: 1490px; /* Adjust to move left/right */
     
     font-size: 100px; /* Makes it larger */
     color: #043d7a; /* Blue color */
@@ -213,7 +213,7 @@ body {
 .arrow-symbol3 {
     position: absolute;
     bottom: 395px; /* Adjust to align with the search bar */
-    left: 2050px; /* Adjust to move left/right */
+    left: 2030px; /* Adjust to move left/right */
     
     font-size: 100px; /* Makes it larger */
     color: #043d7a; /* Blue color */
@@ -222,7 +222,7 @@ body {
 .step2-image {
     position: absolute; /* Ensures precise placement */
     bottom: 67px; /* Moves it slightly up from the bottom */
-    left: 1040px; /* Aligns it with the left side of the slideshow */
+    left: 1000px; /* Aligns it with the left side of the slideshow */
 }
 
 .step2-image img {
@@ -234,7 +234,7 @@ body {
 .calendar-image {
     position: absolute; /* Ensures precise placement */
     bottom: 67px; /* Moves it slightly up from the bottom */
-    left: 1050px; /* Aligns it with the left side of the slideshow */
+    left: 1010px; /* Aligns it with the left side of the slideshow */
 }
 
 .calendar-image img {
@@ -246,7 +246,7 @@ body {
 .step3-image {
     position: absolute; /* Ensures precise placement */
     bottom: 64px; /* Moves it slightly up from the bottom */
-    left: 1565px; /* Aligns it with the left side of the slideshow */
+    left: 1535px; /* Aligns it with the left side of the slideshow */
 }
 
 .step3-image img {
@@ -270,7 +270,7 @@ body {
 .step5-image {
     position: absolute; /* Ensures precise placement */
     bottom: 64px; /* Moves it slightly up from the bottom */
-    left: 1640px; /* Aligns it with the left side of the slideshow */
+    left: 1610px; /* Aligns it with the left side of the slideshow */
 }
 
 .step5-image img {

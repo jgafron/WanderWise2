@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedHotel = JSON.parse(sessionStorage.getItem("selectedHotel") || "{}");
     let addressParts = selectedHotel.address ? selectedHotel.address.split(",") : [];
     let city = addressParts.length > 1 ? addressParts[1].trim() : "";
-    let country = addressParts.length > 4 ? addressParts[4].trim() : "";
+    let country = sessionStorage.getItem("countryReal")
 
     console.log(`📍 Fetching places for: ${city}, ${country}`);
 
