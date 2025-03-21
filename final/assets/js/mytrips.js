@@ -110,11 +110,27 @@ document.addEventListener("DOMContentLoaded", async function () {
             <div class="trip-buttons">
                 <button class="view-trip-btn" data-id="${docSnap.id}">View Trip</button>
                 <button class="delete-trip-btn" data-id="${docSnap.id}">Delete Trip</button>
+                <button class="save-pdf-btn" data-id="${docSnap.id}" style="display: none;">Save as PDF</button>
             </div>
             <div class="expanded-trip-content" style="display: none;"></div> <!-- Hidden by default -->
             `;
 
             tripList.appendChild(tripCard);
+        });
+
+        document.getElementById("home-btn").addEventListener("click", function () {
+            console.log("🏠 Redirecting to /plan...");
+            window.location.href = "/plan";
+        });
+        
+        document.getElementById("my-trip-btn").addEventListener("click", function () {
+            console.log("📌 Redirecting to /trips...");
+            window.location.href = "/trips";
+        });
+        
+        document.getElementById("create-trip-btn").addEventListener("click", function () {
+            console.log("✈️ Redirecting to /createtrips...");
+            window.location.href = "/createtrip";
         });
 
         // ✅ Add event listeners to view trip buttons
@@ -134,6 +150,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                     expandedContainer.style.display = "none";
                     tripContainer.classList.remove("hide-other");
                     viewTripButton.style.display = "block"; // Show button again
+                    tripCard.querySelector(".save-pdf-btn").style.display = "block"; // Show Save as PDF button
+                    tripCard.querySelector(".delete-trip-btn").style.display = "none"; // Hide Delete Trip button
+
                     return;
                 }
         
@@ -197,6 +216,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                         expandedContainer.style.display = "none";
                         tripContainer.classList.remove("hide-other");
                         viewTripButton.style.display = "block"; // Show button again
+                        tripCard.querySelector(".save-pdf-btn").style.display = "none"; // Hide Save as PDF button
+                    tripCard.querySelector(".delete-trip-btn").style.display = "block";
                     });
         
                 } catch (error) {
@@ -242,6 +263,48 @@ document.addEventListener("DOMContentLoaded", async function () {
                     console.error(`Error deleting trip ${tripId}:`, error);
                     alert("Failed to delete trip. Please try again.");
                 }
+            });
+        });
+
+        document.querySelectorAll(".save-pdf-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                const tripId = this.getAttribute("data-id");
+                console.log(`📄 Saving trip ${tripId} as PDF...`);
+        
+                const tripCard = this.closest(".trip-card");
+                const tripTitle = tripCard.querySelector("h3").innerText;
+                const itineraryContent = tripCard.querySelector("#itinerary-content").innerHTML;
+        
+                if (!itineraryContent) {
+                    alert("No itinerary available to save.");
+                    return;
+                }
+        
+                // Use jsPDF
+                const doc = new jsPDF();
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(16);
+                doc.text(tripTitle, 10, 20);
+        
+                doc.setFont("helvetica", "normal");
+                doc.setFontSize(12);
+                let y = 30; // Start position for text
+                const lineHeight = 8;
+        
+                // Convert HTML itinerary content to text
+                const textLines = itineraryContent.replace(/<br>/g, "\n").replace(/<\/?[^>]+(>|$)/g, "").split("\n");
+        
+                textLines.forEach(line => {
+                    if (y > 280) { // If text reaches bottom, add new page
+                        doc.addPage();
+                        y = 20;
+                    }
+                    doc.text(line, 10, y);
+                    y += lineHeight;
+                });
+        
+                doc.save(`${tripTitle}.pdf`);
+                console.log(`✅ PDF for trip ${tripId} saved.`);
             });
         });
         

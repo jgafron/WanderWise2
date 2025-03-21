@@ -45,3 +45,10 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("❌ 'My Trips' button not found!");
     }
 });
+
+document.getElementById("home-btn").addEventListener("click", function (event) {
+    event.preventDefault();  // Prevent default anchor behavior
+    console.log("🏠 Home button clicked. Redirecting to /plan...");
+    window.location.href = "/plan"; // Redirect to /plan route
+});
+

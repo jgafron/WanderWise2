@@ -35,9 +35,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    
     // Handle Form Submission
     document.getElementById("date-form").addEventListener("submit", function (event) {
         event.preventDefault();
         window.location.href = "/selectplaces";
     });
 });
+

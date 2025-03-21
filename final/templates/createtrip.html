@@ -4,28 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create a Trip</title>
+    <link rel="stylesheet" href="assets/css/trips.css"> <!-- Use the same styles -->
     <link rel="stylesheet" href="assets/css/createtrip.css">
 </head>
 <body>
 
-    <div class="form-container">
-        <h2>Enter where you will be staying</h2>
-
-        <!-- ✅ Form for Handling Submission -->
-        <form id="trip-form">
-            <!-- ✅ Google Map Display -->
-            <div id="map"></div>
-
-            <div class="search-container">
-                <input type="text" id="location-search" placeholder="Search for a hotel or Airbnb..." required>
-                <button type="button" id="search-btn">🔍</button>
-            </div>
-
-            <button type="submit" id="submit-btn" disabled>Save & Continue →</button>
-        </form>
+    <!-- Sidebar Navigation (Copied from trips.html) -->
+    <div class="sidebar">
+        <div class="airplane">
+            <img src="assets/img/airplane2.png" alt="Airplane Image">
+        </div>
+        <h2 class="app-name">WanderWise</h2> 
+        <ul class="menu">
+            <li><a href="#" id="home-btn">Home</a></li>
+            <li><a href="#" id="my-trip-btn">My Trips</a></li>
+            <li><a href="#" id="create-trip-btn">Create a Trip</a></li>
+        </ul>
+        <div class="user-info-container" id="user-info-container">
+            <img id="user-profile-pic" class="user-profile-pic" src="https://via.placeholder.com/40" alt="User Image">
+            <span id="user-email" class="user-email">User Email</span>
+            <button id="sign-out-btn" class="sign-out-btn">Sign Out</button>
+        </div>
     </div>
 
+    <!-- Main Content -->
+    <div class="content">
+        <div class="form-container">
+            <h2>Enter where you will be staying</h2>
+
+            <!-- ✅ Form for Handling Submission -->
+            <form id="trip-form">
+                <!-- ✅ Google Map Display -->
+                <div id="map"></div>
+
+                <div class="search-container">
+                    <input type="text" id="location-search" placeholder="Search for a hotel or Airbnb..." required>
+                    <button type="button" id="search-btn">🔍</button>
+                </div>
+
+                <button type="submit" id="submit-btn" disabled>Save & Continue →</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="assets/js/auth.js" defer></script>
     <script src="assets/js/createtrip.js"></script>
 </body>
 </html>
-

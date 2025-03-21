@@ -1,6 +1,5 @@
-/* General Page Styling */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, sans-serif;
     background: #f5f7fa;
     display: flex;
     justify-content: center;
@@ -26,6 +25,15 @@ h2 {
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
+}
+
+.app-name {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: -120px;
+    margin-bottom: 60px;
+    text-align: center;
 }
 
 /* Input Field Styling */
@@ -73,4 +81,214 @@ button:disabled {
 button:hover:not(:disabled) {
     background: #0056b3;
     transform: scale(1.05);
+}
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body layout */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+/* Sidebar (Same as /trips page) */
+.sidebar {
+    width: 450px;
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar Logo */
+.airplane img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-bottom: 40px;
+}
+
+/* Sidebar Menu */
+.menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.menu li {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.menu li a {
+    display: block;
+    background-color: #34495e;
+    padding: 15px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    border-radius: 30px;
+    font-size: 24px;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.menu li a:hover {
+    background-color: #1abc9c;
+}
+
+/* User Info Container */
+.user-info-container {
+    position: absolute;
+    bottom: 20px; /* Keep it at the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    justify-content: space-between;
+}
+
+/* User Image */
+.user-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* User Email */
+.user-email {
+    font-size: 14px;
+    color: #2c3e50;
+    flex-grow: 1;
+    text-align: left;
+}
+
+/* Sign Out Button */
+.sign-out-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.sign-out-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Main content */
+.content {
+    margin-left: 470px; /* Adjust to match sidebar width */
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Center the form */
+.form-container {
+    width: 500px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin: 100px auto;
+}
+
+/* Google Maps container */
+#map {
+    width: 100%;
+    height: 300px; /* Ensure visibility */
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+/* Search bar container */
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 5px;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    background-color: #fff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Search input */
+.search-container input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 25px 0 0 25px;
+}
+
+/* Search button (Icon) */
+.search-container button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 0 25px 25px 0;
+    transition: background 0.3s;
+}
+
+.search-container button:hover {
+    background-color: #007BFF;
+    color: white;
+}
+
+/* Submit Button */
+#submit-btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 18px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+#submit-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#submit-btn:hover:not(:disabled) {
+    background-color: #0056b3;
 }
