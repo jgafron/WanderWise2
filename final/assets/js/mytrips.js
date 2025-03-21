@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function () {
     console.log("🔥 My Trips Page Loaded!");
 
-    // ✅ Ensure Firebase and Firestore are initialized
+    // Ensure Firebase and Firestore are initialized
     async function waitForFirebase() {
         let attempts = 0;
         const maxAttempts = 10;
@@ -18,15 +18,15 @@ document.addEventListener("DOMContentLoaded", async function () {
         return true;
     }
 
-    // ✅ Wait for Firestore
+    // Wait for Firestore
     const firebaseReady = await waitForFirebase();
     if (!firebaseReady) return;
 
-    // ✅ Firestore Import
+    // Firestore Import
     const firestoreModule = await import("https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js");
-    const { getDocs, getDoc, doc, collection } = firestoreModule;
+    const { getDocs, getDoc, doc, deleteDoc, collection } = firestoreModule;
 
-    // ✅ Get current logged-in user
+    // Get current logged-in user
     let user = JSON.parse(sessionStorage.getItem("firebaseUser") || "{}");
 
     if (!user.uid) {
@@ -36,9 +36,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         return;
     }
 
-    console.log(`✅ Fetching trips for user: ${user.uid}`);
+    console.log(`Fetching trips for user: ${user.uid}`);
 
-    // ✅ Query Firestore for user trips
+    // Query Firestore for user trips
     async function fetchUserTrips() {
         try {
             const userTripsRef = collection(window.db, `users/${user.uid}/itineraries`);
@@ -50,15 +50,15 @@ document.addEventListener("DOMContentLoaded", async function () {
                 return;
             }
 
-            console.log(`✅ Found ${tripSnapshots.size} trip(s).`);
+            console.log(`Found ${tripSnapshots.size} trip(s).`);
             displayTrips(tripSnapshots);
         } catch (error) {
-            console.error("❌ Error fetching trips:", error);
+            console.error(" Error fetching trips:", error);
             document.getElementById("trip-list").innerHTML = "<p>Error loading trips.</p>";
         }
     }
 
-    // ✅ Function to display trips
+    // Function to display trips
     function displayTrips(tripSnapshots) {
         const tripList = document.getElementById("trip-list");
         tripList.innerHTML = ""; // Clear previous content
@@ -104,11 +104,14 @@ document.addEventListener("DOMContentLoaded", async function () {
             tripCard.classList.add("trip-card");
 
             tripCard.innerHTML = `
-                <h3>${tripTitle}</h3>
-                <p><strong>Dates:</strong> ${startDate} - ${endDate}</p>
-                ${selectedPlacesHTML}
+            <h3>${tripTitle}</h3>
+            <p><strong>Dates:</strong> ${startDate} - ${endDate}</p>
+            ${selectedPlacesHTML}
+            <div class="trip-buttons">
                 <button class="view-trip-btn" data-id="${docSnap.id}">View Trip</button>
-                <div class="expanded-trip-content" style="display: none;"></div> <!-- Hidden by default -->
+                <button class="delete-trip-btn" data-id="${docSnap.id}">Delete Trip</button>
+            </div>
+            <div class="expanded-trip-content" style="display: none;"></div> <!-- Hidden by default -->
             `;
 
             tripList.appendChild(tripCard);
@@ -148,7 +151,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     const tripSnap = await getDoc(tripRef);
         
                     if (!tripSnap.exists()) {
-                        console.error("❌ Itinerary not found.");
+                        console.error("Itinerary not found.");
                         expandedContainer.innerHTML = "<p>No itinerary available.</p>";
                         expandedContainer.style.display = "block";
                         return;
@@ -157,7 +160,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     const tripData = tripSnap.data();
                     console.log("🔥 FULL TRIP OBJECT:", JSON.stringify(tripData, null, 2));
         
-                    // ✅ Parse `itineraryText` correctly
+                    // Parse `itineraryText` correctly
                     let itineraryHTML = `<h2 class="itinerary-title">Generated Itinerary</h2><div id="itinerary-content">`;
         
                     if (tripData.itineraryText) {
@@ -184,10 +187,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         
                     itineraryHTML += `<button class="close-trip-btn">Close</button>`;
         
-                    // ✅ Populate expanded content and display
+                    // Populate expanded content and display
                     expandedContainer.innerHTML = itineraryHTML;
         
-                    // ✅ Close button functionality
+                    // Close button functionality
                     expandedContainer.querySelector(".close-trip-btn").addEventListener("click", () => {
                         console.log("📌 Closing expanded itinerary.");
                         tripCard.classList.remove("expanded");
@@ -197,9 +200,47 @@ document.addEventListener("DOMContentLoaded", async function () {
                     });
         
                 } catch (error) {
-                    console.error("❌ Error fetching itinerary:", error);
+                    console.error("Error fetching itinerary:", error);
                     expandedContainer.innerHTML = "<p>Error loading itinerary.</p>";
                     expandedContainer.style.display = "block";
+                }
+            });
+        });
+
+        document.querySelectorAll(".delete-trip-btn").forEach(button => {
+            button.addEventListener("click", async function () {
+                const tripId = this.getAttribute("data-id");
+                console.log(`🗑 Attempting to delete trip: ${tripId}`);
+        
+                if (!tripId) {
+                    console.error("No trip ID found. Cannot delete.");
+                    return;
+                }
+        
+                if (!confirm("Are you sure you want to delete this trip?")) {
+                    console.log("Trip deletion canceled by user.");
+                    return;
+                }
+        
+                try {
+                    console.log(`📡 Connecting to Firestore to delete trip: ${tripId}`);
+                    const tripRef = doc(window.db, `users/${user.uid}/itineraries/${tripId}`);
+        
+                    await deleteDoc(tripRef);
+                    console.log(`Successfully deleted trip: ${tripId} from Firestore.`);
+        
+                    // Remove the trip card from UI
+                    const tripCard = this.closest(".trip-card");
+                    if (tripCard) {
+                        tripCard.remove();
+                        console.log(`🧹 Removed trip ${tripId} from the UI.`);
+                    } else {
+                        console.warn(`⚠️ Trip card element for ${tripId} not found in DOM.`);
+                    }
+        
+                } catch (error) {
+                    console.error(`Error deleting trip ${tripId}:`, error);
+                    alert("Failed to delete trip. Please try again.");
                 }
             });
         });
