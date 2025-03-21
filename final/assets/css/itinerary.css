@@ -249,3 +249,51 @@ footer button {
     color: #333;
     line-height: 1.5; 
 }
+
+h2, h3 {
+    color: #34495e; /* Blue color */
+}
+
+/* Make labels inside the Trip Details section blue */
+.trip-info strong {
+    color: #34495e;
+}
+
+/* Ensure 'Selected Places' title is blue */
+.trip-sidebar h3 {
+    color: #34495e;
+}
+
+.itinerary-header {
+    display: flex;
+    justify-content: space-between; /* Push buttons to the right */
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Button container */
+.itinerary-buttons {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+/* Styled buttons */
+.itinerary-buttons button {
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.itinerary-buttons button:hover {
+    background-color: #005fa3;
+    transform: scale(1.05);
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+}
