@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let continueBtn = document.getElementById("continue-btn");
     let selectedHotelDisplay = document.getElementById("selected-hotel");
 
-    // ✅ Full list of 195 countries
+    // Full list of 195 countries
     const countryList = [
         "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria",
         "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "Yemen", "Zambia", "Zimbabwe"
     ];
 
-    // ✅ Common country abbreviations
+    // Common country abbreviations
     const countryAbbreviations = {
         "USA": "United States",
         "U.S.A.": "United States",
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "R.O.C.": "Taiwan"
     };
 
-    // ✅ Retrieve & Parse Selected Hotel Location
+    // Retrieve & Parse Selected Hotel Location
     let selectedLocation = sessionStorage.getItem("selectedHotel");
 
     if (selectedLocation) {
@@ -49,9 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let address = parsedLocation.address; // The full address string
         let country = "Unknown Country"; // Default
     
-        console.log("Full Address:", address);
     
-        // ✅ Check for a country abbreviation first
+        // Check for a country abbreviation first
         for (let abbr in countryAbbreviations) {
             if (address.includes(abbr)) {
                 country = countryAbbreviations[abbr];
@@ -70,7 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     
         selectedHotelDisplay.textContent = `You are staying at: ${parsedLocation.name} in ${country}`;
-        console.log("Extracted Country:", country);
     
         // ✅ Replace spaces with hyphens for use in API URLs
         let countryReal = country.replace(/\s+/g, "-");

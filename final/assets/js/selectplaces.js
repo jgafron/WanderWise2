@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let city = addressParts.length > 1 ? addressParts[1].trim() : "";
     let country = sessionStorage.getItem("countryReal")
 
-    console.log(`📍 Fetching places for: ${city}, ${country}`);
+    console.log(` Fetching places for: ${city}, ${country}`);
 
     // Fetch places based on selected category
     function fetchPlaces(category) {
@@ -132,16 +132,13 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.getElementById("home-btn").addEventListener("click", function () {
-    console.log("🏠 Redirecting to /plan...");
     window.location.href = "/plan";
 });
 
 document.getElementById("my-trip-btn").addEventListener("click", function () {
-    console.log("📌 Redirecting to /trips...");
     window.location.href = "/trips";
 });
 
 document.getElementById("create-trip-btn").addEventListener("click", function () {
-    console.log("✈️ Redirecting to /createtrips...");
     window.location.href = "/createtrip";
 });

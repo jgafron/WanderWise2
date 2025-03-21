@@ -15,14 +15,14 @@ document.addEventListener("DOMContentLoaded", async function () {
             const data = await response.json();
 
             if (data.firebaseConfig) {
-                console.log("✅ Firebase Config Loaded:", data.firebaseConfig);
+                console.log("Firebase Config Loaded:", data.firebaseConfig);
                 return data.firebaseConfig;
             } else {
-                console.error("❌ Error fetching Firebase config");
+                console.error("Error fetching Firebase config");
                 return null;
             }
         } catch (error) {
-            console.error("❌ Fetching Firebase config failed:", error);
+            console.error("Fetching Firebase config failed:", error);
             return null;
         }
     }
@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         // ✅ Initialize Firestore
         db = firestoreModule.getFirestore(firebaseApp);
 
-        console.log("✅ Firebase & Firestore Initialized");
+        console.log("Firebase & Firestore Initialized");
         window.firebaseConfig = firebaseConfig; // ✅ Store globally for access in other scripts
-        window.db = db; // ✅ Store Firestore globally
+        window.db = db; // Store Firestore globally
 
         // ✅ Ensure `onAuthStateChanged` runs
         setupAuthListener();
@@ -62,13 +62,10 @@ document.addEventListener("DOMContentLoaded", async function () {
             console.log("🔄 Auth State Changed:", user);
 
             if (user) {
-                console.log("✅ User is logged in:", user.email);
-                console.log("📸 Profile Picture:", user.photoURL);
                 sessionStorage.setItem("firebaseUser", JSON.stringify(user));
 
                 updateUserUI(user);
             } else {
-                console.log("❌ User is NOT logged in.");
                 sessionStorage.removeItem("firebaseUser");
 
                 if (userInfoContainer) {
@@ -101,7 +98,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         let storedUser = sessionStorage.getItem("firebaseUser");
         if (storedUser) {
             let user = JSON.parse(storedUser);
-            console.log("🔄 Restoring user from session:", user);
             updateUserUI(user);
         }
     });
@@ -109,30 +105,28 @@ document.addEventListener("DOMContentLoaded", async function () {
     window.signInWithGoogle = async () => {
         try {
             const result = await signInWithPopup(auth, provider);
-            console.log("✅ User signed in:", result.user);
             const idToken = await result.user.getIdToken();
             await sendAuthTokenToBackend(idToken);
             window.location.href = "/plan";  
         } catch (error) {
-            console.error("❌ Login failed:", error);
+            console.error("Login failed:", error);
         }
     };
 
     window.signOutUser = async () => {
-        console.log("🛑 Sign out button clicked! Attempting to sign out...");
+        console.log("Sign out button clicked! Attempting to sign out...");
 
         if (!auth) {
-            console.error("❌ Firebase Auth is not initialized yet!");
+            console.error("Firebase Auth is not initialized yet!");
             return;
         }
 
         try {
             await signOut(auth);
-            console.log("🚪 User signed out successfully!");
             sessionStorage.removeItem("firebaseUser"); // ✅ Clear stored user info
             window.location.href = "/"; // Redirect to homepage
         } catch (error) {
-            console.error("❌ Logout failed:", error);
+            console.error("Logout failed:", error);
         }
     };
 
@@ -145,18 +139,16 @@ document.addEventListener("DOMContentLoaded", async function () {
             });
 
             const data = await response.json();
-            console.log("✅ Server Response:", data);
         } catch (error) {
             console.error("❌ Error sending ID token:", error);
         }
     }
 
-    // ✅ Ensure the button works
+    // Ensure the button works
     if (signOutButton) {
-        console.log("✅ Sign Out Button Found! Adding Event Listener.");
         signOutButton.addEventListener("click", window.signOutUser);
     } else {
-        console.error("❌ Sign Out Button NOT found in the DOM!");
+        console.error("Sign Out Button NOT found in the DOM!");
     }
 
     getStartedButton?.addEventListener("click", signInWithGoogle);

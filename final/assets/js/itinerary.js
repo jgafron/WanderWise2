@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    console.log("🟢 itinerary.js Loaded!");
+    console.log("itinerary.js Loaded!");
 
 // Retry logic: Wait for Firebase Config
     let retryCount = 0;
@@ -156,16 +156,15 @@ checkFirebaseConfig();
     // When Save Itinerary button is clicked, log the object instead of saving
     saveButton.addEventListener("click", async function (event) {
         event.preventDefault();
-        console.log("🟢 Save Itinerary button clicked. Preparing to save...");
     
-        // ✅ Check if Firestore is available
+        // Check if Firestore is available
         if (!window.db) {
             console.error("Firestore is not initialized! Check auth.js.");
             alert("An error occurred: Firestore is not connected.");
             return;
         }
     
-        // ✅ Get current logged-in user
+        // Get current logged-in user
         let user = JSON.parse(sessionStorage.getItem("firebaseUser") || "{}");
         if (!user.uid) {
             console.error("User not authenticated. Cannot save itinerary.");
@@ -173,7 +172,7 @@ checkFirebaseConfig();
             return;
         }
     
-        // ✅ Create itinerary object
+        // Create itinerary object
         let itineraryData = {
             destination: selectedHotel.address || "Unknown Destination",
             hotel: selectedHotel,
@@ -186,9 +185,9 @@ checkFirebaseConfig();
             timestamp: new Date().toISOString()
         };
     
-        console.log("📋 Itinerary Object to be saved:", itineraryData);
+        console.log("Itinerary Object to be saved:", itineraryData);
     
-        // ✅ Generate a unique document ID for the itinerary
+        // Generate a unique document ID for the itinerary
         const firestoreModule = await import("https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js");
         const { setDoc, doc } = firestoreModule;
     
@@ -197,7 +196,6 @@ checkFirebaseConfig();
         try {
             console.log("⏳ Saving itinerary to Firestore...");
             await setDoc(doc(window.db, `users/${user.uid}/itineraries`, itineraryId), itineraryData);
-            console.log("✅ Itinerary saved successfully!");
             alert("✅ Your itinerary has been saved successfully!");
     
             // ✅ Redirect after saving
@@ -205,23 +203,23 @@ checkFirebaseConfig();
                 window.location.href = "/plan";
             }, 2000);
         } catch (error) {
-            console.error("❌ Error saving itinerary:", error);
+            console.error("Error saving itinerary:", error);
             alert("An error occurred while saving your itinerary. Please try again.");
         }
     });
     
     document.getElementById("home-btn").addEventListener("click", function () {
-        console.log("🏠 Redirecting to /plan...");
+        console.log("Redirecting to /plan...");
         window.location.href = "/plan";
     });
     
     document.getElementById("my-trip-btn").addEventListener("click", function () {
-        console.log("📌 Redirecting to /trips...");
+        console.log("Redirecting to /trips...");
         window.location.href = "/trips";
     });
     
     document.getElementById("create-trip-btn").addEventListener("click", function () {
-        console.log("✈️ Redirecting to /createtrips...");
+        console.log("Redirecting to /createtrips...");
         window.location.href = "/createtrip";
     });
 });

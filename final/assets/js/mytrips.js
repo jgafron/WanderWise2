@@ -1,20 +1,20 @@
 document.addEventListener("DOMContentLoaded", async function () {
-    console.log("🔥 My Trips Page Loaded!");
+    console.log(" My Trips Page Loaded!");
 
     // Ensure Firebase and Firestore are initialized
     async function waitForFirebase() {
         let attempts = 0;
         const maxAttempts = 10;
         while ((!window.firebaseConfig || !window.db) && attempts < maxAttempts) {
-            console.warn(`⚠️ Firebase not ready, retrying... (${attempts + 1}/${maxAttempts})`);
+            console.warn(`Firebase not ready, retrying... (${attempts + 1}/${maxAttempts})`);
             await new Promise(resolve => setTimeout(resolve, 500));
             attempts++;
         }
         if (!window.db) {
-            console.error("❌ Firestore not initialized after retries.");
+            console.error("Firestore not initialized after retries.");
             return false;
         }
-        console.log("✅ Firestore is ready.");
+        console.log("Firestore is ready.");
         return true;
     }
 
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             const tripSnapshots = await getDocs(userTripsRef);
 
             if (tripSnapshots.empty) {
-                console.warn("⚠️ No trips found for this user.");
+                console.warn("No trips found for this user.");
                 document.getElementById("trip-list").innerHTML = "<p>No saved trips found.</p>";
                 return;
             }
@@ -119,25 +119,21 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
 
         document.getElementById("home-btn").addEventListener("click", function () {
-            console.log("🏠 Redirecting to /plan...");
             window.location.href = "/plan";
         });
         
         document.getElementById("my-trip-btn").addEventListener("click", function () {
-            console.log("📌 Redirecting to /trips...");
             window.location.href = "/trips";
         });
         
         document.getElementById("create-trip-btn").addEventListener("click", function () {
-            console.log("✈️ Redirecting to /createtrips...");
             window.location.href = "/createtrip";
         });
 
-        // ✅ Add event listeners to view trip buttons
+        // Add event listeners to view trip buttons
         document.querySelectorAll(".view-trip-btn").forEach(button => {
             button.addEventListener("click", async function () {
                 const tripId = this.getAttribute("data-id");
-                console.log(`🔍 Fetching itinerary for trip: ${tripId}`);
         
                 const tripCard = this.closest(".trip-card");
                 const tripContainer = document.getElementById("trip-list");
@@ -177,7 +173,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                     }
         
                     const tripData = tripSnap.data();
-                    console.log("🔥 FULL TRIP OBJECT:", JSON.stringify(tripData, null, 2));
         
                     // Parse `itineraryText` correctly
                     let itineraryHTML = `<h2 class="itinerary-title">Generated Itinerary</h2><div id="itinerary-content">`;
@@ -200,7 +195,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                             `;
                         });
                     } else {
-                        console.warn("⚠️ No itinerary data found.");
+                        console.warn("No itinerary data found.");
                         itineraryHTML += "<p>No itinerary available.</p>";
                     }
         
@@ -211,7 +206,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         
                     // Close button functionality
                     expandedContainer.querySelector(".close-trip-btn").addEventListener("click", () => {
-                        console.log("📌 Closing expanded itinerary.");
+                        console.log("Closing expanded itinerary.");
                         tripCard.classList.remove("expanded");
                         expandedContainer.style.display = "none";
                         tripContainer.classList.remove("hide-other");
@@ -239,22 +234,18 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }
         
                 if (!confirm("Are you sure you want to delete this trip?")) {
-                    console.log("Trip deletion canceled by user.");
                     return;
                 }
         
                 try {
-                    console.log(`📡 Connecting to Firestore to delete trip: ${tripId}`);
                     const tripRef = doc(window.db, `users/${user.uid}/itineraries/${tripId}`);
         
                     await deleteDoc(tripRef);
-                    console.log(`Successfully deleted trip: ${tripId} from Firestore.`);
         
                     // Remove the trip card from UI
                     const tripCard = this.closest(".trip-card");
                     if (tripCard) {
                         tripCard.remove();
-                        console.log(`🧹 Removed trip ${tripId} from the UI.`);
                     } else {
                         console.warn(`⚠️ Trip card element for ${tripId} not found in DOM.`);
                     }
@@ -269,7 +260,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         document.querySelectorAll(".save-pdf-btn").forEach(button => {
             button.addEventListener("click", function () {
                 const tripId = this.getAttribute("data-id");
-                console.log(`📄 Saving trip ${tripId} as PDF...`);
         
                 const tripCard = this.closest(".trip-card");
                 const tripTitle = tripCard.querySelector("h3").innerText;
@@ -304,13 +294,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                 });
         
                 doc.save(`${tripTitle}.pdf`);
-                console.log(`✅ PDF for trip ${tripId} saved.`);
+                console.log(` PDF for trip ${tripId} saved.`);
             });
         });
         
         
     }
 
-    // ✅ Fetch and display trips
+    // Fetch and display trips
     fetchUserTrips();
 });

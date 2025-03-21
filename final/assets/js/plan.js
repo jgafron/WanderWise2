@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let storedUser = sessionStorage.getItem("firebaseUser");
         if (storedUser) {
             let user = JSON.parse(storedUser);
-            console.log("🔄 Restoring user from session:", user);
 
             if (userInfoContainer) {
                 userInfoContainer.style.display = "flex";
@@ -19,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 userProfilePic.src = user.photoURL || "https://via.placeholder.com/40";
             }
         } else {
-            console.warn("❌ No user session found.");
+            console.warn("No user session found.");
         }
     }
 
@@ -28,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (createTripButton) {
         createTripButton.addEventListener("click", function (event) {
             event.preventDefault();
-            console.log("✅ 'Create a Trip' button clicked. Redirecting...");
             window.location.href = "/createtrip";
         });
     } else {
@@ -38,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (myTripsBtn) {
         myTripsBtn.addEventListener("click", function (event) {
             event.preventDefault();
-            console.log("✅ 'My Trips' button clicked. Redirecting...");
             window.location.href = "/trips";
         });
     } else {
@@ -48,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.getElementById("home-btn").addEventListener("click", function (event) {
     event.preventDefault();  // Prevent default anchor behavior
-    console.log("🏠 Home button clicked. Redirecting to /plan...");
     window.location.href = "/plan"; // Redirect to /plan route
 });
 

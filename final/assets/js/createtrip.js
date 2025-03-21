@@ -12,26 +12,22 @@ async function loadGoogleMaps() {
 
         if (!apiKey) throw new Error("API key not found.");
 
-        console.log("✅ API Key Loaded Successfully:", apiKey);
-
         let script = document.createElement("script");
         script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
         script.async = true;
         script.defer = true;
         script.onerror = function () {
-            console.error("❌ Google Maps API failed to load.");
+            console.error("Google Maps API failed to load.");
         };
 
         document.head.appendChild(script);
     } catch (error) {
-        console.error("❌ Error loading API key:", error);
+        console.error("Error loading API key:", error);
     }
 }
 
 // Initialize Google Map and Places Autocomplete
 function initMap() {
-    console.log("✅ Google Maps Loaded Successfully");
-
     let defaultLocation = { lat: 40.7128, lng: -74.0060 }; // Default New York
 
     // Initialize Google Map
@@ -52,7 +48,7 @@ function initMap() {
     let submitButton = document.getElementById("submit-btn");
 
     if (!inputField) {
-        console.error("❌ Input field for Autocomplete not found.");
+        console.error("Input field for Autocomplete not found.");
         return;
     }
 
@@ -71,8 +67,6 @@ function initMap() {
             alert("No details available for the selected location.");
             return;
         }
-
-        console.log(`Selected Place: ${place.name}, ${place.formatted_address}`);
 
         // Move the map & marker to the selected location
         map.setCenter(place.geometry.location);
@@ -103,21 +97,19 @@ function initMap() {
 
         // Store in sessionStorage
         sessionStorage.setItem("selectedHotel", JSON.stringify(selectedHotel));
-        console.log("✅ Hotel saved to sessionStorage:", selectedHotel);
+        console.log("Hotel saved to sessionStorage:", selectedHotel);
 
-        // 🚀 Move to the next step (Redirect if needed)
+        // Move to the next step (Redirect if needed)
         window.location.href = "/select-dates"; // Replace with your actual next step
     });
 }
 
 
 document.getElementById("home-btn").addEventListener("click", function () {
-    console.log("🏠 Redirecting to /plan...");
     window.location.href = "/plan";
 });
 
 document.getElementById("my-trip-btn").addEventListener("click", function () {
-    console.log("📌 Redirecting to /trips...");
     window.location.href = "/trips";
 });
 
