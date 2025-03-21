@@ -1,46 +1,373 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
+/* Reset default styles */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body layout */
+body {
+    font-family: Arial, sans-serif;
     display: flex;
+    height: 100vh;
     background-color: #f4f4f4;
 }
 
 /* Sidebar */
 .sidebar {
-    width: 250px;
-    background-color: #2C3E50;
+    width: 450px;
+    height: 100vh;
+    background-color: #ffffff;
     color: white;
     padding: 20px;
-    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
-.sidebar .app-name {
-    text-align: center;
-    font-size: 22px;
-    margin-top: 10px;
+/* Profile image */
+.airplane img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-bottom: 40px;
 }
 
-.sidebar .menu {
+/* Menu buttons */
+.menu {
     list-style: none;
     padding: 0;
+    width: 100%;
 }
 
-.sidebar .menu li {
-    padding: 10px;
+.menu li {
+    margin: 15px 0;
+    text-align: center;
 }
 
-.sidebar .menu a {
-    color: white;
-    text-decoration: none;
+.menu li a {
     display: block;
+    background-color: #34495e;
+    padding: 15px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    border-radius: 30px;
+    font-size: 24px;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    transition: background 0.3s;
 }
 
-.sidebar .menu a.active {
+.menu li a:hover {
+    background-color: #1abc9c;
+}
+
+/* Main content */
+.content {
+    margin-left: 470px;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Slideshow Container */
+/* Slideshow Container */
+.slideshow-container {
+    position: relative;
+    width: 1800px; /* Increased width */
+    height: 650px; /* Adjusted height slightly */
+    margin: auto;
+    margin-top: 30px; /* Moves it up */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff; /* Prevents empty gaps */
+}
+
+/* Ensure all slides stay the same size */
+.slide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style for Images */
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Fills the container without distortion */
+    border-radius: 10px;
+    background-color: white;
+}
+
+/* Next & Previous buttons */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: white;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.prev:hover, .next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Position prev and next buttons */
+.prev {
+    left: 10px;
+}
+.next {
+    right: 10px;
+}
+
+/* Fade animation */
+.fade {
+    animation: fadeEffect 1s ease-in-out;
+}
+
+.app-name {
+    font-size: 28px;
     font-weight: bold;
+    color: #2c3e50; /* Dark blue shade */
+    margin-top: -120px; /* Adjust spacing if needed */
+    margin-bottom: 60px;
+    text-align: center;
 }
 
+/* Step Header - Position it in the lower-left of the slideshow */
+/* Step Image - Position in the lower-left of the slideshow */
+/* Step 1 Image - Position Below Slideshow */
+.step1-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 350px; /* Moves it slightly up from the bottom */
+    left: 565px; /* Aligns it with the left side of the slideshow */
+}
+
+.step1-image img {
+    width: 450px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+.mock-searchbar {
+    position: absolute; /* Allows precise placement */
+    bottom: 300px; /* Adjust this to move it up/down */
+    left: 630px; /* Adjust this to move it left/right */
+
+    width: 300px; /* Adjust width */
+    height: 50px; /* Adjust height */
+    background-color: #ffffff; /* White background */
+    border: 2px solid #ccc; /* Light gray border */
+    border-radius: 25px; /* Rounded edges */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 10px 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Placeholder text inside the mock search bar */
+.mock-placeholder {
+    font-size: 16px;
+    color: #aaa; /* Light gray to look like placeholder */
+    font-style: italic;
+}
+
+.arrow-symbol {
+    position: absolute;
+    bottom: 395px; /* Adjust to align with the search bar */
+    left: 990px; /* Adjust to move left/right */
+    
+    font-size: 100px; /* Makes it larger */
+    color: #043d7a; /* Blue color */
+}
+
+.arrow-symbol2 {
+    position: absolute;
+    bottom: 395px; /* Adjust to align with the search bar */
+    left: 1530px; /* Adjust to move left/right */
+    
+    font-size: 100px; /* Makes it larger */
+    color: #043d7a; /* Blue color */
+}
+
+.arrow-symbol3 {
+    position: absolute;
+    bottom: 395px; /* Adjust to align with the search bar */
+    left: 2050px; /* Adjust to move left/right */
+    
+    font-size: 100px; /* Makes it larger */
+    color: #043d7a; /* Blue color */
+}
+
+.step2-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 67px; /* Moves it slightly up from the bottom */
+    left: 1040px; /* Aligns it with the left side of the slideshow */
+}
+
+.step2-image img {
+    width: 550px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+.calendar-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 67px; /* Moves it slightly up from the bottom */
+    left: 1050px; /* Aligns it with the left side of the slideshow */
+}
+
+.calendar-image img {
+    width: 600px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+.step3-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 64px; /* Moves it slightly up from the bottom */
+    left: 1565px; /* Aligns it with the left side of the slideshow */
+}
+
+.step3-image img {
+    width: 550px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+.step4-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 64px; /* Moves it slightly up from the bottom */
+    left: 2020px; /* Aligns it with the left side of the slideshow */
+}
+
+.step4-image img {
+    width: 550px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+.step5-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 64px; /* Moves it slightly up from the bottom */
+    left: 1640px; /* Aligns it with the left side of the slideshow */
+}
+
+.step5-image img {
+    width: 400px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+
+.iternary-image {
+    position: absolute; /* Ensures precise placement */
+    bottom: 105px; /* Moves it slightly up from the bottom */
+    left: 2125px; /* Aligns it with the left side of the slideshow */
+}
+
+.iternary-image img {
+    width: 350px !important; /* Forces the width */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+}
+
+@keyframes fadeEffect {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}
+
+.sign-in-container {
+    position: absolute;
+    bottom: 20px; /* Adjust positioning */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+}
+
+#sign-in-btn {
+    background-color: #1abc9c;
+    color: white;
+    font-size: 18px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 80%;
+}
+
+#sign-in-btn:hover {
+    background-color: #16a085;
+}
+/* User Info Container */
+.user-info-container {
+    position: absolute;
+    bottom: 20px; /* Keep it at the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 80%; /* Keep a clean width */
+    justify-content: space-between;
+}
+
+/* User Image */
+.user-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* User Email */
+.user-email {
+    font-size: 14px;
+    color: #2c3e50;
+    flex-grow: 1;
+    text-align: left;
+}
+
+/* Sign Out Button */
+.sign-out-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.sign-out-btn:hover {
+    background-color: #c0392b;
+}
 /* Content */
 .content {
     flex: 1;
@@ -48,16 +375,20 @@ body {
 }
 
 .page-title {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: bold;
     margin-bottom: 10px;
+    text-align: center;
+    color: #2c3e50;
 }
 
 .subtitle {
     font-size: 18px;
     color: #555;
-    margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 30px;
 }
+
 
 /* Trip Cards */
 .trip-container {
@@ -66,26 +397,136 @@ body {
     gap: 20px;
 }
 
-.trip-card {
-    background: white;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 280px;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.trip-card:hover {
-    transform: scale(1.03);
-}
-
-.trip-card h3 {
-    margin: 0;
-    font-size: 20px;
-}
-
-.trip-card p {
-    color: #666;
+.view-trip-btn {
+    margin-top: auto; /* Push it to the bottom */
+    padding: 10px 18px;
     font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    width: 100%; /* Full width button */
+    display: block; /* Ensure visibility */
+}
+
+.trip-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    min-height: 500px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* When expanded, trip card gets larger */
+.trip-card.expanded {
+    width: 80%;
+    min-height: 600px;
+    padding: 30px;
+    position: relative;
+    z-index: 10;
+}
+
+.trip-card.expanded .view-trip-btn {
+    display: none;
+}
+/* Prevent the selected places from becoming massive */
+.places-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Tiny images for selected places */
+.place-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100px; /* Small size */
+}
+
+.place-img {
+    width: 80px; /* Keep images small */
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Keep other cards hidden when one is open */
+.trip-container.hide-other .trip-card:not(.expanded) {
+    display: none;
+}
+
+/* Keep the itinerary inside a structured format */
+.expanded-trip-content {
+    display: none;
+    width: 100%;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Show itinerary properly when expanded */
+.trip-card.expanded .expanded-trip-content {
+    display: block;
+}
+.day-card {
+    background: white;
+    padding: 12px;
+    border-radius: 6px;
+    border-left: 4px solid #0077cc;
+    margin-bottom: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Expand to fit space */
+    min-height: 120px; /* Give enough height for text */
+}
+
+/* Ensure day content is readable */
+.day-title {
+    font-size: 16px; /* Bigger font */
+    font-weight: bold;
+    color: #0077cc;
+    margin-bottom: 5px;
+}
+
+.selected-places-title {
+    margin-top: 15px;  /* Increase space */
+    font-weight: bold;
+    display: block; /* Ensures it appears as a block */
+}
+.day-content {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+    text-align: left;
+    overflow: hidden;
+}
+
+/* Close Button */
+.close-trip-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.close-trip-btn:hover {
+    background-color: #c0392b;
 }

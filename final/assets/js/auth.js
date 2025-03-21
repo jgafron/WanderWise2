@@ -119,11 +119,18 @@ document.addEventListener("DOMContentLoaded", async function () {
     };
 
     window.signOutUser = async () => {
+        console.log("🛑 Sign out button clicked! Attempting to sign out...");
+
+        if (!auth) {
+            console.error("❌ Firebase Auth is not initialized yet!");
+            return;
+        }
+
         try {
             await signOut(auth);
-            console.log("🚪 User signed out");
+            console.log("🚪 User signed out successfully!");
             sessionStorage.removeItem("firebaseUser"); // ✅ Clear stored user info
-            window.location.href = "/login.html";
+            window.location.href = "/"; // Redirect to homepage
         } catch (error) {
             console.error("❌ Logout failed:", error);
         }
@@ -144,6 +151,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
+    // ✅ Ensure the button works
+    if (signOutButton) {
+        console.log("✅ Sign Out Button Found! Adding Event Listener.");
+        signOutButton.addEventListener("click", window.signOutUser);
+    } else {
+        console.error("❌ Sign Out Button NOT found in the DOM!");
+    }
+
     getStartedButton?.addEventListener("click", signInWithGoogle);
-    signOutButton?.addEventListener("click", signOutUser);
 });
