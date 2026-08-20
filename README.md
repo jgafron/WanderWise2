@@ -1,4 +1,5 @@
 ![WanderWise](https://raw.githubusercontent.com/jgafron/WanderWise2/main/assets/img/wanderwise.png)
+
 # WanderWise
 
 A full-stack travel planning platform that combines Google Maps, Firebase, cloud-hosted AI, and curated destination data to generate personalized travel itineraries.
